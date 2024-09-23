@@ -48,3 +48,13 @@ public class Demo {
     }
 }
 ```
+
+# Releases
+
+[0.1.1](https://github.com/merge-simpson/letsdev-log-level-api/releases/tag/0.1.1)
+- Compatibility: 1.8+
+- `AdaptiveLogger.getLogger(String name)`: `AdaptiveLogger` 추가 (supports unnamed class)
+- `adaptiveLogger.with(org.slf4j.event.Level level)`: `LevelFixedLogger` 추가
+
+[0.1.0](https://github.com/merge-simpson/letsdev-log-level-api/releases/tag/0.1.0)
+- Compatibility: 17+

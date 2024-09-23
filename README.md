@@ -2,18 +2,22 @@
 
 Gradle(Kotlin):
 
-```kotlin
-// `build.gradle.kts` 파일
-repositories {
-    mavenCentral()
-    maven { url = uri("https://jitpack.io") } // added
-}
+`build.gradle.kts`에 다음 항목을 작성합니다.
 
-dependencies {
-    implementation("com.github.merge-simpson:letsdev-log-level-api:0.1.0") // added
+1. `repositories`에 다음을 추가합니다. (`mavenCentral()`을 대신하지 않습니다.)
+    ```kotlin
+    maven { url = uri("https://jitpack.io") }
+    ```
+
+2. `dependencies`에 다음을 추가합니다.
+    ```kotlin
     // NOTE 이 모듈은 SLF4J 구현체를 제공하지 않습니다. 사용하는 SLF4J 구현체가 있어야 합니다.
-}
-```
+    implementation("com.github.merge-simpson:letsdev-log-level-api:0.1.1")
+    ```
+
+# Prerequisites
+
+- Java Version: 1.8+
 
 # Features
 
@@ -30,17 +34,17 @@ dependencies {
 
 ```java
 public class Demo {
-    AdaptiveLogger logger = AdaptiveLogger.getLogger(Demo.class);
-
+    LevelFixedLogger logger;
+    public Demo(LogLevel logLevel) {
+        // 외부에서 로그 레벨을 주입해 사용합니다.
+        logger = AdaptiveLogger
+                .getLogger(Demo.class)
+                .with(logLevel); // e.g. LogLevel.INFO
+    }
+    
     void example() {
         String name = "John";
-        log(LogLevel.INFO, "Hello, My name is {}", name);
-    }
-
-    void log(LogLevel logLevel, String message, Object... args) {
-        // 외부에서 로그 레벨을 주입해 사용합니다.
-        logger.with(logLevel)
-                .log(message, args);
+        logger.log("Hello, My name is {}", name);
     }
 }
 ```

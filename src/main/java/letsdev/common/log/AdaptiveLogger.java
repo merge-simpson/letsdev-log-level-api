@@ -20,7 +20,7 @@ public final class AdaptiveLogger {
     }
 
     public static <T> AdaptiveLogger getLogger(Class<T> targetClass) {
-        return AdaptiveLoggerHolder.ADAPTIVE_LOGGERS.computeIfAbsent(
+        return AdaptiveLoggerHolder.ADAPTIVE_LOGGER_MAP.computeIfAbsent(
                 targetClass, AdaptiveLogger::new
         );
     }
@@ -41,23 +41,40 @@ public final class AdaptiveLogger {
             Objects.requireNonNull(logger);
             Objects.requireNonNull(logLevel);
             assert LogLevel.values().length == 7 : "추가된 로그 레벨에 대한 적절한 조치가 필요합니다.";
+
             this.logLevel = logLevel;
-            this.logConsumer = switch (logLevel) {
-                case ALL, TRACE -> logger::trace;
-                case DEBUG -> logger::debug;
-                case INFO -> logger::info;
-                case WARN -> logger::warn;
-                case ERROR -> logger::error;
-                case OFF -> (ignore) -> {};
-            };
-            this.logBiConsumer = switch (logLevel) {
-                case ALL, TRACE -> logger::trace;
-                case DEBUG -> logger::debug;
-                case INFO -> logger::info;
-                case WARN -> logger::warn;
-                case ERROR -> logger::error;
-                case OFF -> (ignoreMessage, ignoreArgs) -> {};
-            };
+
+            // source & target compatibility: 1.8
+            switch (logLevel) {
+                case ALL:
+                case TRACE:
+                    logConsumer = logger::trace;
+                    logBiConsumer = logger::trace;
+                    break;
+                case DEBUG:
+                    logConsumer = logger::debug;
+                    logBiConsumer = logger::debug;
+                    break;
+                case INFO:
+                    logConsumer = logger::info;
+                    logBiConsumer = logger::info;
+                    break;
+                case WARN:
+                    logConsumer = logger::warn;
+                    logBiConsumer = logger::warn;
+                    break;
+                case ERROR:
+                    logConsumer = logger::error;
+                    logBiConsumer = logger::error;
+                    break;
+                case OFF:
+                    logConsumer = (ignore) -> {};
+                    logBiConsumer = (ignoredMessage, ignoredArgs) -> {};
+                    break;
+                default:
+                    String message = "Only ALL, TRACE, DEBUG, INFO, WARN, ERROR, OFF can be used in LevelFixedLogger.";
+                    throw new Error(message);
+            }
         }
 
         public LevelFixedLogger(Logger logger, Level level) {
@@ -85,6 +102,6 @@ public final class AdaptiveLogger {
     }
 
     private static class AdaptiveLoggerHolder {
-        private static final Map<Class<?>, AdaptiveLogger> ADAPTIVE_LOGGERS = new ConcurrentHashMap<>();
+        private static final Map<Class<?>, AdaptiveLogger> ADAPTIVE_LOGGER_MAP = new ConcurrentHashMap<>();
     }
 }

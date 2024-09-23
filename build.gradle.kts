@@ -4,7 +4,14 @@ plugins {
 }
 
 group = "me.letsdev"
-version = "0.1.0"
+version = "0.1.1"
+
+java {
+    toolchain {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
 
 repositories {
     mavenCentral()

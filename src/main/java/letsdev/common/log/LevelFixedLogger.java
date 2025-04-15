@@ -61,6 +61,10 @@ public final class LevelFixedLogger {
         return LogLevel.valueOf(level.name());
     }
 
+    public LogLevel getLogLevel() {
+        return logLevel;
+    }
+
     public void log(String message) {
         logConsumer.accept(message);
     }

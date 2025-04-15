@@ -17,12 +17,12 @@ Gradle(Kotlin):
 
 # Prerequisites
 
-- Java Version: 1.8+
+- Compatible Java Version: 1.8+
 
 # Features
 
-- \<\<enum\>\> `LogLevel` (independent of other libraries)
-- \<\<class\>\> `AdaptiveLogger` (dependent on `SLF4J`)
+- (enum) `LogLevel` is independent of external libraries.
+- (class) `AdaptiveLogger` is dependent on `SLF4J`.
 
 ## LogLevel
 
@@ -30,7 +30,7 @@ Gradle(Kotlin):
 
 ## AdaptiveLogger: 로그 레벨을 추상화하기 위한 로거
 
-`AdaptiveLogger`는 로깅 레벨을 외부 설정으로 주입하거나, 중요도에 따라 로깅 레벨을 동적으로 결정할 때 사용합니다.
+`AdaptiveLogger`는 사용할 로깅 함수의 레벨을 외부 설정으로 주입하거나, 필요에 따라 로깅 레벨을 동적으로 결정할 때 사용합니다.
 
 ```java
 public class Demo {
@@ -52,9 +52,11 @@ public class Demo {
 # Releases
 
 [0.1.1](https://github.com/merge-simpson/letsdev-log-level-api/releases/tag/0.1.1)
+
 - Compatibility: 1.8+
 - `AdaptiveLogger.getLogger(String name)`: `AdaptiveLogger` 추가 (supports unnamed class)
 - `adaptiveLogger.with(org.slf4j.event.Level level)`: `LevelFixedLogger` 추가
 
 [0.1.0](https://github.com/merge-simpson/letsdev-log-level-api/releases/tag/0.1.0)
+
 - Compatibility: 17+

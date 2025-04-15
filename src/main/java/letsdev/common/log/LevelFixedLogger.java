@@ -13,9 +13,9 @@ public final class LevelFixedLogger {
     private final BiConsumer<String, Object[]> logBiConsumer;
 
     public LevelFixedLogger(Logger logger, LogLevel logLevel) {
+        assert LogLevel.values().length == 7 : "추가된 로그 레벨에 대한 적절한 조치가 필요합니다.";
         Objects.requireNonNull(logger);
         Objects.requireNonNull(logLevel);
-        assert LogLevel.values().length == 7 : "추가된 로그 레벨에 대한 적절한 조치가 필요합니다.";
 
         this.logLevel = logLevel;
 

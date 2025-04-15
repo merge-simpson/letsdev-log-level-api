@@ -14,10 +14,12 @@ Gradle(Kotlin):
     // NOTE 이 모듈은 SLF4J 구현체를 제공하지 않습니다. 사용하는 SLF4J 구현체가 있어야 합니다.
     implementation("com.github.merge-simpson:letsdev-log-level-api:0.1.1")
     ```
+<br />
 
 # Prerequisites
 
 - Compatible Java Version: 1.8+
+<br />
 
 # Features
 
@@ -48,6 +50,7 @@ public class Demo {
     }
 }
 ```
+<br />
 
 # Releases
 

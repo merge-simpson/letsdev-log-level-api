@@ -13,14 +13,14 @@ public final class LevelFixedLogger {
     private final BiConsumer<String, Object[]> logBiConsumer;
 
     public LevelFixedLogger(Logger logger, LogLevel logLevel) {
-        assert LogLevel.values().length == 7 : "추가된 로그 레벨에 대한 적절한 조치가 필요합니다.";
+        // FIXME don't rely on the size.
+        assert LogLevel.values().length == 6 : "추가된 로그 레벨에 대한 적절한 조치가 필요합니다.";
         Objects.requireNonNull(logger);
         Objects.requireNonNull(logLevel);
 
         this.logLevel = logLevel;
 
         switch (logLevel) {
-            case ALL:
             case TRACE:
                 logConsumer = logger::trace;
                 logBiConsumer = logger::trace;

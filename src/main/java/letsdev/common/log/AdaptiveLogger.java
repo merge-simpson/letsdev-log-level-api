@@ -117,16 +117,10 @@ public final class AdaptiveLogger {
         }
 
         public void log(String message) {
-            if (logLevel == LogLevel.OFF) {
-                return;
-            }
             logConsumer.accept(message);
         }
 
         public void log(String message, Object... args) {
-            if (logLevel == LogLevel.OFF) {
-                return;
-            }
             logBiConsumer.accept(message, args);
         }
     }

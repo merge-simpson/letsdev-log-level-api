@@ -3,6 +3,7 @@ package letsdev.common.log;
 import org.slf4j.Logger;
 import org.slf4j.event.Level;
 
+import java.util.EnumSet;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -13,6 +14,21 @@ public final class LevelFixedLogger {
     private final BiConsumer<String, Object[]> logBiConsumer;
 
     public LevelFixedLogger(Logger logger, LogLevel logLevel) {
+        /* NOTE DO NOT USE `Set.of`.
+         *  Because `Set.of` is not compatible with JDK 1.8
+         *  See:
+         *      Set.of          since 9
+         *      EnumSet.of      since 1.5
+         *      EnumSet.allOf   since 1.5
+         */
+        assert EnumSet.of(
+                LogLevel.TRACE,
+                LogLevel.DEBUG,
+                LogLevel.INFO,
+                LogLevel.WARN,
+                LogLevel.ERROR,
+                LogLevel.OFF
+        ).equals(EnumSet.allOf(LogLevel.class)) : "추가된 로그 레벨에 대한 적절한 조치가 필요합니다.";
         // FIXME don't rely on the size.
         assert LogLevel.values().length == 6 : "추가된 로그 레벨에 대한 적절한 조치가 필요합니다.";
         Objects.requireNonNull(logger);

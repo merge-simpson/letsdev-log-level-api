@@ -19,7 +19,6 @@ public final class LevelFixedLogger {
 
         this.logLevel = logLevel;
 
-        // source & target compatibility: 1.8
         switch (logLevel) {
             case ALL:
             case TRACE:

@@ -9,20 +9,20 @@ import java.util.Objects;
 public class AdaptiveLogger {
     private final Logger logger;
 
-    protected <T> AdaptiveLogger(Class<T> targetClass) {
+    protected AdaptiveLogger(Class<?> targetClass) {
         this(targetClass.getName());
     }
 
-    protected <T> AdaptiveLogger(String name) {
+    protected AdaptiveLogger(String name) {
         Objects.requireNonNull(name);
         this.logger = LoggerFactory.getLogger(name);
     }
 
-    public static <T> AdaptiveLogger getLogger(Class<T> targetClass) {
+    public static AdaptiveLogger getLogger(Class<?> targetClass) {
         return CachedAdaptiveLogger.getLogger(targetClass.getName());
     }
 
-    public static <T> AdaptiveLogger getLogger(String name) {
+    public static AdaptiveLogger getLogger(String name) {
         return CachedAdaptiveLogger.getLogger(name);
     }
 

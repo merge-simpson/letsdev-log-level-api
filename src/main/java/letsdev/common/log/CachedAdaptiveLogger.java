@@ -22,10 +22,10 @@ public class CachedAdaptiveLogger extends AdaptiveLogger {
      *
      * 이 오류는 수퍼타입의 static 메서드가 오히려 동일한 와일드카드 사용 시 발생하지 않으며, 제네릭 사용 시에만 발견되고 있음.
      */
-//    public static AdaptiveLogger getLogger(Class<?> clazz) {
-//        Objects.requireNonNull(clazz);
-//        return getLogger(clazz.getName());
-//    }
+    public static AdaptiveLogger getLogger(Class<?> clazz) {
+        Objects.requireNonNull(clazz);
+        return getLogger(clazz.getName());
+    }
 
     public static AdaptiveLogger getLogger(String className) {
         // NOTE String::isBlank is since JDK 11

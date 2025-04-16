@@ -2,7 +2,7 @@ package letsdev.common.log;
 
 import org.slf4j.event.Level;
 
-import java.util.Set;
+import java.util.EnumSet;
 
 public enum LogLevel {
     TRACE(Level.TRACE),
@@ -19,16 +19,22 @@ public enum LogLevel {
     }
 
     public static LogLevel valueOf(Level level) {
-        assert Set.of(Level.TRACE, Level.DEBUG, Level.INFO, Level.WARN, Level.ERROR).contains(level);
+        assert EnumSet.of(Level.TRACE, Level.DEBUG, Level.INFO, Level.WARN, Level.ERROR).contains(level);
 
-        return switch (level) {
-            case TRACE -> TRACE;
-            case DEBUG -> DEBUG;
-            case INFO -> INFO;
-            case WARN -> WARN;
-            case ERROR -> ERROR;
-            case null -> OFF;
-        };
+        switch (level) {
+            case TRACE:
+                return TRACE;
+            case DEBUG:
+                return DEBUG;
+            case INFO:
+                return INFO;
+            case WARN:
+                return WARN;
+            case ERROR:
+                return ERROR;
+            default:
+                return OFF;
+        }
     }
 
     public Level toSlf4jLevel() {

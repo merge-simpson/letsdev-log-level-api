@@ -28,8 +28,23 @@ public class CachedAdaptiveLogger extends AdaptiveLogger {
 //    }
 
     public static AdaptiveLogger getLogger(String className) {
-        Objects.requireNonNull(className);
+        // NOTE String::isBlank is since JDK 11
+        final String sourceName = isBlank(className) ? "unnamed" : className;
         return Holder.MAP.computeIfAbsent(className, CachedAdaptiveLogger::new);
+    }
+
+    private static boolean isBlank(String str) {
+        if (str == null || str.isEmpty()) {
+            return true;
+        }
+
+        for (char ch: str.toCharArray()) {
+            if (!Character.isWhitespace(ch)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

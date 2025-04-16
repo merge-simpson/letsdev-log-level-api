@@ -12,7 +12,7 @@ Gradle(Kotlin):
 2. `dependencies`에 다음을 추가합니다.
     ```kotlin
     // NOTE 이 모듈은 SLF4J 구현체를 제공하지 않습니다. 사용하는 SLF4J 구현체가 있어야 합니다.
-    implementation("com.github.merge-simpson:letsdev-log-level-api:0.1.1")
+    implementation("com.github.merge-simpson:letsdev-log-level-api:0.1.2-rc1")
     ```
 <br />
 

@@ -54,6 +54,17 @@ public class Demo {
 
 # Releases
 
+## Recent
+
+[0.1.2 (rc1)](https://github.com/merge-simpson/letsdev-log-level-api/releases/tag/0.1.2-rc1)
+
+- Compatibility: JDK 1.8+
+- `CachedAdaptiveLogger` is always cached when it is created.
+- `AdaptiveLogger` can create uncached logger now if using `getLoggerNonCached`.
+- SLF4J API, which has base interfaces of SLF4J, is bundled now.
+
+## Old Releases
+
 [0.1.1](https://github.com/merge-simpson/letsdev-log-level-api/releases/tag/0.1.1)
 
 - Compatibility: 1.8+

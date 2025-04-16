@@ -19,6 +19,7 @@ Gradle(Kotlin):
 # Prerequisites
 
 - Compatible Java Version: 1.8+
+
 <br />
 
 # Features
@@ -33,15 +34,45 @@ Gradle(Kotlin):
 
 ## AdaptiveLogger: 로그 레벨을 추상화하기 위한 로거
 
-`AdaptiveLogger`는 사용할 로깅 함수의 레벨을 외부 설정으로 주입하거나, 필요에 따라 로깅 레벨을 동적으로 결정할 때 사용합니다.
+`AdaptiveLogger`는 사용할 로깅 함수의 레벨을 외부 설정으로 주입하거나,
+필요에 따라 로깅 레벨을 동적으로 결정할 때 사용합니다.
+
+<details open>
+<summary>캐싱 되는 로깅 객체 사용 예시</summary>
+
+```java
+LevelFixedLogger logger = AdaptiveLogger.getLogger(CurrentClass.class)
+    .with(LogLevel.INFO);
+
+logger.log("Hello, world!");
+```
+
+</details>
+
+<br />
+
+<details open>
+<summary>캐싱 되지 않는 로깅 객체 사용 예시</summary>
+
+```java
+LevelFixedLogger logger = AdaptiveLogger.getLoggerNonCached(CurrentClass.class)
+    .with(LogLevel.INFO);
+
+logger.log("Hello, world!");
+```
+
+</details>
+
+조금 더 구체적인 용례는 다음과 같습니다.
 
 ```java
 public class Demo {
+    
     LevelFixedLogger logger;
+    
     public Demo(LogLevel logLevel) {
-        // 외부에서 로그 레벨을 주입해 사용합니다.
-        logger = AdaptiveLogger
-                .getLogger(Demo.class)
+        // 로그 레벨을 주입해 사용합니다.
+        logger = AdaptiveLogger.getLogger(Demo.class)
                 .with(logLevel); // e.g. LogLevel.INFO
     }
     
@@ -51,6 +82,7 @@ public class Demo {
     }
 }
 ```
+
 <br />
 
 # Releases

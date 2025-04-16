@@ -8,15 +8,15 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-public final class AdaptiveLogger {
+public class AdaptiveLogger {
     private final Logger logger;
     private final Map<LogLevel, LevelFixedLogger> cachedLoggers = new ConcurrentHashMap<>();
 
-    private <T> AdaptiveLogger(Class<T> targetClass) {
+    protected <T> AdaptiveLogger(Class<T> targetClass) {
         this(targetClass.getName());
     }
 
-    private <T> AdaptiveLogger(String name) {
+    protected <T> AdaptiveLogger(String name) {
         Objects.requireNonNull(name);
         this.logger = LoggerFactory.getLogger(name);
     }

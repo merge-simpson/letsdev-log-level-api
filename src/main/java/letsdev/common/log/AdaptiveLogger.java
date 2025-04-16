@@ -19,14 +19,11 @@ public class AdaptiveLogger {
     }
 
     public static <T> AdaptiveLogger getLogger(Class<T> targetClass) {
-        Objects.requireNonNull(targetClass);
-        return getLogger(targetClass.getName());
+        return CachedAdaptiveLogger.getLogger(targetClass.getName());
     }
 
     public static <T> AdaptiveLogger getLogger(String name) {
-        // NOTE String::isBlank is since JDK 11
-        final String sourceName = isBlank(name) ? "unnamed" : name;
-        return new AdaptiveLogger(sourceName);
+        return CachedAdaptiveLogger.getLogger(name);
     }
 
     private static boolean isBlank(String str) {

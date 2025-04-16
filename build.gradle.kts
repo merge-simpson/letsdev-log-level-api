@@ -27,7 +27,7 @@ tasks.test {
 
 publishing {
     publications {
-        create<MavenPublication>("mavenJava") {
+        create<MavenPublication>("adaptive-logger") {
             from(components["java"])
             groupId = "com.github.merge-simpson"
             artifactId = project.name

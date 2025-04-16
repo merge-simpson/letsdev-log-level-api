@@ -4,33 +4,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
 
-import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
 
-public final class AdaptiveLogger {
+public class AdaptiveLogger {
     private final Logger logger;
-    private final Map<LogLevel, LevelFixedLogger> cachedLoggers = new ConcurrentHashMap<>();
 
-    private <T> AdaptiveLogger(Class<T> targetClass) {
+    protected AdaptiveLogger(Class<?> targetClass) {
         this(targetClass.getName());
     }
 
-    private <T> AdaptiveLogger(String name) {
+    protected AdaptiveLogger(String name) {
         Objects.requireNonNull(name);
         this.logger = LoggerFactory.getLogger(name);
     }
 
-    public static <T> AdaptiveLogger getLogger(Class<T> targetClass) {
-        Objects.requireNonNull(targetClass);
-        return getLogger(targetClass.getName());
+    public static AdaptiveLogger getLogger(Class<?> targetClass) {
+        return CachedAdaptiveLogger.getLogger(targetClass.getName());
     }
 
-    public static <T> AdaptiveLogger getLogger(String name) {
-        final String sourceName = isBlank(name) ? "unnamed" : name;
-        return AdaptiveLoggerHolder.ADAPTIVE_LOGGER_MAP.computeIfAbsent(
-                sourceName, (ignore) -> new AdaptiveLogger(sourceName)
-        );
+    public static AdaptiveLogger getLogger(String name) {
+        return CachedAdaptiveLogger.getLogger(name);
     }
 
     private static boolean isBlank(String str) {
@@ -49,18 +42,11 @@ public final class AdaptiveLogger {
 
     public LevelFixedLogger with(LogLevel logLevel) {
         Objects.requireNonNull(logLevel);
-        return cachedLoggers.computeIfAbsent(
-                logLevel,
-                (level) -> new LevelFixedLogger(logger, level)
-        );
+        return new LevelFixedLogger(logger, logLevel);
     }
 
     public LevelFixedLogger with(Level logLevel) {
         Objects.requireNonNull(logLevel);
         return with(LogLevel.valueOf(logLevel.name()));
-    }
-
-    private static class AdaptiveLoggerHolder {
-        private static final Map<String, AdaptiveLogger> ADAPTIVE_LOGGER_MAP = new ConcurrentHashMap<>();
     }
 }

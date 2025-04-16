@@ -29,8 +29,6 @@ public final class LevelFixedLogger {
                 LogLevel.ERROR,
                 LogLevel.OFF
         ).equals(EnumSet.allOf(LogLevel.class)) : "추가된 로그 레벨에 대한 적절한 조치가 필요합니다.";
-        // FIXME don't rely on the size.
-        assert LogLevel.values().length == 6 : "추가된 로그 레벨에 대한 적절한 조치가 필요합니다.";
         Objects.requireNonNull(logger);
         Objects.requireNonNull(logLevel);
 

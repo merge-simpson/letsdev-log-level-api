@@ -25,6 +25,7 @@ Gradle(Kotlin):
 
 - (enum) `LogLevel` is independent of external libraries.
 - (class) `AdaptiveLogger` is dependent on `SLF4J`.
+- (class) `CachedAdaptiveLogger`는 자기 자신 및 자신의 로깅 레벨별 함수를 캐싱합니다.
 
 ## LogLevel
 

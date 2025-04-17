@@ -66,7 +66,7 @@ public final class LevelFixedLogger {
     }
 
     public LevelFixedLogger(Logger logger, Level level) {
-        this(logger, LogLevel.valueOf(level));
+        this(logger, Slf4jLevelUtil.toLogLevel(level));
     }
 
     public LogLevel getLogLevel() {

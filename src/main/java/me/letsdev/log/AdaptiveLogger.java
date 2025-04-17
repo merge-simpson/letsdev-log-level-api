@@ -1,4 +1,4 @@
-package letsdev.common.log;
+package me.letsdev.log;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

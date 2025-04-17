@@ -1,4 +1,4 @@
-package letsdev.common.log;
+package me.letsdev.log;
 
 import java.util.Map;
 import java.util.Objects;

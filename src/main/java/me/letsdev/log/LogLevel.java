@@ -1,4 +1,4 @@
-package letsdev.common.log;
+package me.letsdev.log;
 
 public enum LogLevel {
     TRACE,

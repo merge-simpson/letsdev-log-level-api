@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "me.letsdev"
-version = "0.1.2-rc1"
+version = "0.1.2-rc2"
 
 java {
     toolchain {

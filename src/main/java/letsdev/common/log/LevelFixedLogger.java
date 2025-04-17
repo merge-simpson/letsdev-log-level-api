@@ -66,12 +66,7 @@ public final class LevelFixedLogger {
     }
 
     public LevelFixedLogger(Logger logger, Level level) {
-        this(logger, converLogLevel(level));
-    }
-
-    private static LogLevel converLogLevel(Level level) {
-        Objects.requireNonNull(level);
-        return LogLevel.valueOf(level.name());
+        this(logger, LogLevel.valueOf(level));
     }
 
     public LogLevel getLogLevel() {
